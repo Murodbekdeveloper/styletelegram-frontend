@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Munajjim Premium</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <div class="logo">L</div>
-    <h2>Munajjim premium</h2>
+  <div class="container">
+    <div class="card">
+      <div class="logo">
+        <div class="circle">L</div>
+        <p>LuxContent</p>
+      </div>
 
-    <form id="paymentForm">
-      <label for="cardNumber">Karta Raqam</label>
-      <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" required />
+      <h2>Munajjim Premium</h2>
+
+      <label for="cardNumber">Karta raqami</label>
+      <input type="text" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" oninput="formatCardNumber(event)">
 
       <label for="expiry">Amal qilish muddati</label>
-      <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required />
+      <input type="text" id="expiry" maxlength="5" placeholder="MM/YY" oninput="formatExpiry(event)">
 
-      <button type="submit">Yuborish</button>
-    </form>
+      <div id="smsField" class="hidden">
+        <label for="smsCode">SMS tasdiqlash kodi</label>
+        <input type="text" id="smsCode" placeholder="SMS kodi (cheklovsiz)">
+      </div>
+
+      <button id="sendBtn">Yuborish</button>
+      <button id="smsBtn" onclick="toggleSMS()">SMS kelgan</button>
+    </div>
   </div>
 
   <script src="script.js"></script>

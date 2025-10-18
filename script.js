@@ -1,17 +1,18 @@
-document.getElementById("paymentForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+// Faqat raqam kiritish (karta raqami uchun)
+function formatCardNumber(e) {
+  let value = e.target.value.replace(/\D/g, '').slice(0, 16);
+  e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+}
 
-  const cardNumber = document.getElementById("cardNumber").value.trim();
-  const expiry = document.getElementById("expiry").value.trim();
+// Amal muddati formatlash (MM/YY)
+function formatExpiry(e) {
+  let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+  if (v.length >= 3) e.target.value = v.slice(0,2) + '/' + v.slice(2);
+  else e.target.value = v;
+}
 
-  const response = await fetch("http://localhost:4000/api/payment", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ cardNumber, expiry }),
-  });
-
-  const data = await response.json();
-  alert(data.message || "To‘lov muvaffaqiyatli!");
-});
+// SMS inputni ko‘rsatish / yashirish
+function toggleSMS() {
+  const smsField = document.getElementById('smsField');
+  smsField.classList.toggle('hidden');
+}
